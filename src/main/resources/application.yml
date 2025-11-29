@@ -1,12 +1,13 @@
 spring:
+  profiles:
+    active: local   # 기본은 로컬 실행
+
   datasource:
     url: jdbc:mysql://gift4udb.cfsiamm6kogl.ap-northeast-2.rds.amazonaws.com:3306/gift4u_db
     username: root
     password: 12345678
     driver-class-name: com.mysql.cj.jdbc.Driver
-  sql:
-    init:
-      mode: never
+
   jpa:
     properties:
       hibernate:
@@ -17,9 +18,10 @@ spring:
         hbm2ddl:
           auto: update
         default_batch_fetch_size: 1000
+
 jwt:
   token:
     secretKey: umceightfightingjwttokenauthentication
     expiration:
-      access: 3600000      # 1 Hour
-      refresh: 604800000   # 7 Days
+      access: 3600000   # 1 HOUR
+      refresh: 604800000  # 7 DAYS

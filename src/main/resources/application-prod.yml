@@ -1,0 +1,5 @@
+spring:
+  data:
+    redis:
+      host: 10.0.1.169    # ← EC2 내부 Redis IP
+      port: 6379
