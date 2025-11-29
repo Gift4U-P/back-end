@@ -7,8 +7,11 @@ WORKDIR /app
 # 전체 프로젝트 복사
 COPY . .
 
+# gradlew 실행 권한 추가
+RUN chmod +x gradlew
+
 # 종속성 캐시 및 빌드
-RUN gradle clean build -x test
+RUN ./gradlew clean build -x test
 
 # ------------------------------------------------------
 
