@@ -23,4 +23,4 @@ COPY --from=builder /app/${JAR_FILE} app.jar
 EXPOSE 8080
 
 # 앱 실행 명령어
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar", "--spring.profiles.active=prod"]

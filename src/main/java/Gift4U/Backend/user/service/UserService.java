@@ -16,4 +16,7 @@ public interface UserService {
 
 	// 로그아웃 API
 	String logout(HttpServletRequest request);
+
+	// 프로필 조회 API
+	UserResponseDTO.ProfileResult profile(Long userId);
 }
