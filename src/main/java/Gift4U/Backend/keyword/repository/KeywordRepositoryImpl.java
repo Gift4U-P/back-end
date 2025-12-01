@@ -1,4 +1,4 @@
-package Gift4U.Backend.survey.repository;
+package Gift4U.Backend.keyword.repository;
 
 import org.springframework.stereotype.Repository;
 
@@ -6,5 +6,5 @@ import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class SurveyRepositoryImpl {
+public class KeywordRepositoryImpl {
 }
