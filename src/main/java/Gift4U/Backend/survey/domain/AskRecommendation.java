@@ -1,4 +1,4 @@
-package Gift4U.Backend.ask.domain;
+package Gift4U.Backend.survey.domain;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
