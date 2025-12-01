@@ -17,6 +17,8 @@ public enum ErrorStatus implements BaseErrorCode {
 	_UNAUTHORIZED(HttpStatus.UNAUTHORIZED,"COMMON401","인증이 필요합니다."),
 	_FORBIDDEN(HttpStatus.FORBIDDEN, "COMMON403", "금지된 요청입니다."),
 
+	//JSON 파싱 에러
+	JSON_PARSE_ERROR(HttpStatus.BAD_REQUEST, "JSON4001", "JSON 파싱에 실패했습니다."),
 
 	// 사용자 에러
 	EMAIL_DUPLICATE(HttpStatus.BAD_REQUEST, "USER4001", "이미 사용된 이메일입니다."),
@@ -35,6 +37,12 @@ public enum ErrorStatus implements BaseErrorCode {
 	UNSUPPORTED_TOKEN(HttpStatus.UNAUTHORIZED, "TOKEN4006", "지원하지 않는 토큰 형식입니다."),
 	INVALID_SIGNATURE(HttpStatus.UNAUTHORIZED, "TOKEN4007", "토큰의 서명이 잘못됐습니다."),
 	TOKEN_NOT_FOUND(HttpStatus.BAD_REQUEST, "TOKEN4008", "토큰이 없습니다."),
+
+	// 설문 추천 에러
+	SURVEY_NOT_EXIST_ERROR(HttpStatus.BAD_REQUEST, "SURVEY4001", "존재하지 않는 surveyId 이거나 본인의 survey가 아닙니다."),
+
+	// 키워드 추천 에러
+	KEYWORD_NOT_EXIST_ERROR(HttpStatus.BAD_REQUEST, "KEYWORD4001", "존재하지 않는 keywordId 이거나 본인의 keyword가 아닙니다."),
 
 	// 예시,,,
 	ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다.");

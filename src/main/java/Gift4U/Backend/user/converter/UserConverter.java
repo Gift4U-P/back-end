@@ -24,4 +24,13 @@ public class UserConverter {
 			.createdAt(user.getCreatedAt())
 			.build();
 	}
+
+	// 프로필 조회 결과 DTO 반환
+	public static UserResponseDTO.ProfileResult toMyPageProfileResponse(User user) {
+		return UserResponseDTO.ProfileResult.builder()
+			.name(user.getName())
+			.gender(user.getGender())
+			.email(user.getEmail())
+			.build();
+	}
 }

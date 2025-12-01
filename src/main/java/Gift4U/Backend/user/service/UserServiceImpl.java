@@ -104,4 +104,14 @@ public class UserServiceImpl implements UserService {
 
 		return email;
 	}
+
+	// 프로필 조회 API
+	@Override
+	public UserResponseDTO.ProfileResult profile(Long userId) {
+		// 사용자 조회
+		User user = userRepository.findById(userId)
+			.orElseThrow(() -> new GeneralException(ErrorStatus.EMAIL_USER_NOT_MATCH));
+
+		return UserConverter.toMyPageProfileResponse(user);
+	}
 }
