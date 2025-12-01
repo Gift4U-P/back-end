@@ -1,10 +1,12 @@
 package Gift4U.Backend.user.web.docs;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import Gift4U.Backend.apiPayload.ApiResponse;
+import Gift4U.Backend.security.auth.userDetails.CustomUserDetails;
 import Gift4U.Backend.security.auth.web.dto.AuthResponseDTO;
 import Gift4U.Backend.user.web.dto.UserRequestDTO;
 import Gift4U.Backend.user.web.dto.UserResponseDTO;
@@ -51,4 +53,15 @@ public interface UserControllerDocs {
 		}
 	)
 	ResponseEntity<ApiResponse<Object>> logout(HttpServletRequest request);
+
+	@Operation(
+		summary = "프로필 조회 API",
+		description = "사용자의 이름, 성별, 이메일 정보를 조회하는 API입니다.",
+		responses = {
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "성공입니다.",
+				content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.ProfileResult.class))),
+		}
+	)
+	ResponseEntity<ApiResponse<UserResponseDTO.ProfileResult>> profile(
+		@AuthenticationPrincipal CustomUserDetails userDetails);
 }

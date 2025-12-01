@@ -2,6 +2,8 @@ package Gift4U.Backend.user.web.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Gift4U.Backend.apiPayload.ApiResponse;
 import Gift4U.Backend.apiPayload.code.status.SuccessStatus;
+import Gift4U.Backend.security.auth.userDetails.CustomUserDetails;
 import Gift4U.Backend.security.auth.web.dto.AuthResponseDTO;
 import Gift4U.Backend.user.service.UserService;
 import Gift4U.Backend.user.web.docs.UserControllerDocs;
@@ -51,5 +54,22 @@ public class UserController implements UserControllerDocs {
 		userService.logout(request);
 		return ResponseEntity.ok().body(ApiResponse.onSuccess(null));
 	}
+
+	// 프로필 조회 API
+	@GetMapping("/profile")
+	public ResponseEntity<ApiResponse<UserResponseDTO.ProfileResult>> profile(
+		@AuthenticationPrincipal CustomUserDetails userDetails) {
+		Long userId = userDetails.getUserId();
+		UserResponseDTO.ProfileResult result = userService.profile(userId);
+		return new ResponseEntity<>(ApiResponse.of(SuccessStatus._CREATED_ID, result), HttpStatus.CREATED);
+	}
 }
+
+
+
+
+
+
+
+
 
