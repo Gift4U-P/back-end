@@ -17,8 +17,14 @@ public enum ErrorStatus implements BaseErrorCode {
 	_UNAUTHORIZED(HttpStatus.UNAUTHORIZED,"COMMON401","인증이 필요합니다."),
 	_FORBIDDEN(HttpStatus.FORBIDDEN, "COMMON403", "금지된 요청입니다."),
 
-	//JSON 파싱 에러
+	// JSON 파싱 에러
 	JSON_PARSE_ERROR(HttpStatus.BAD_REQUEST, "JSON4001", "JSON 파싱에 실패했습니다."),
+
+	// Redis 저장 에러
+	SAVE_REDIS_ERROR(HttpStatus.BAD_REQUEST, "REDIS4001", "Redis 저장 중 직렬화 오류가 발생했습니다."),
+
+	// FastAPI 연동 에러
+	FASTAPI_COMMUNICATION_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "FASTAPI5001", "FastAPI 서버 통신 중 오류가 발생했습니다."),
 
 	// 사용자 에러
 	EMAIL_DUPLICATE(HttpStatus.BAD_REQUEST, "USER4001", "이미 사용된 이메일입니다."),
@@ -40,6 +46,7 @@ public enum ErrorStatus implements BaseErrorCode {
 
 	// 설문 추천 에러
 	SURVEY_NOT_EXIST_ERROR(HttpStatus.BAD_REQUEST, "SURVEY4001", "존재하지 않는 surveyId 이거나 본인의 survey가 아닙니다."),
+	SURVEY_REDIS_KEY_EXPIRED(HttpStatus.BAD_REQUEST, "SURVEY4002", "사용자의 설문 추천 결과가 Redis에서 만료되었거나 저장되어 있지 않습니다."),
 
 	// 키워드 추천 에러
 	KEYWORD_NOT_EXIST_ERROR(HttpStatus.BAD_REQUEST, "KEYWORD4001", "존재하지 않는 keywordId 이거나 본인의 keyword가 아닙니다."),

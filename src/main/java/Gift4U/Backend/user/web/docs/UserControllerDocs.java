@@ -64,4 +64,14 @@ public interface UserControllerDocs {
 	)
 	ResponseEntity<ApiResponse<UserResponseDTO.ProfileResult>> profile(
 		@AuthenticationPrincipal CustomUserDetails userDetails);
+
+	@Operation(
+		summary = "홈 선물 조회 API",
+		description = "홈 화면에서 선물 목록을 조회하는 API입니다.",
+		responses = {
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "성공입니다.",
+				content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.HomePresentList.class))),
+		}
+	)
+	ResponseEntity<ApiResponse<UserResponseDTO.HomePresentList>> homePresent();
 }

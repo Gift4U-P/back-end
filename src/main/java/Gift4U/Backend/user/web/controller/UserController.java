@@ -63,6 +63,13 @@ public class UserController implements UserControllerDocs {
 		UserResponseDTO.ProfileResult result = userService.profile(userId);
 		return new ResponseEntity<>(ApiResponse.of(SuccessStatus._CREATED_ID, result), HttpStatus.CREATED);
 	}
+
+	// 홈 선물 조회 API
+	@GetMapping("/present/list")
+	public ResponseEntity<ApiResponse<UserResponseDTO.HomePresentList>> homePresent() {
+		UserResponseDTO.HomePresentList result = userService.homePresent();
+		return new ResponseEntity<>(ApiResponse.of(SuccessStatus._OK, result), HttpStatus.CREATED);
+	}
 }
 
 
