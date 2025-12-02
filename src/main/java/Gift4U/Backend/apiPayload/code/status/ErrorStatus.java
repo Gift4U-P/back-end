@@ -20,6 +20,9 @@ public enum ErrorStatus implements BaseErrorCode {
 	//JSON 파싱 에러
 	JSON_PARSE_ERROR(HttpStatus.BAD_REQUEST, "JSON4001", "JSON 파싱에 실패했습니다."),
 
+	// FastAPI 연동 에러
+	FASTAPI_COMMUNICATION_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "FASTAPI5001", "FastAPI 서버 통신 중 오류가 발생했습니다."),
+
 	// 사용자 에러
 	EMAIL_DUPLICATE(HttpStatus.BAD_REQUEST, "USER4001", "이미 사용된 이메일입니다."),
 	PASSWORD_NOT_MATCH(HttpStatus.BAD_REQUEST, "USER4002", "비밀번호가 일치하지 않습니다."),
