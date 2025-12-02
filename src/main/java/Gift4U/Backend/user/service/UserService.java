@@ -19,4 +19,7 @@ public interface UserService {
 
 	// 프로필 조회 API
 	UserResponseDTO.ProfileResult profile(Long userId);
+
+	// 홈 선물 조회 API
+	UserResponseDTO.HomePresentList homePresent();
 }

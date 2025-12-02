@@ -3,3 +3,8 @@ spring:
     redis:
       host: 10.0.1.169    # ← EC2 내부 Redis IP
       port: 6379
+
+external:
+  fastapi:
+    home-present-url: http://fastapi-app:8000/homePresent
+

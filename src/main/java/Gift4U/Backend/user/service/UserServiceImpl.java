@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import Gift4U.Backend.apiPayload.code.status.ErrorStatus;
 import Gift4U.Backend.apiPayload.exception.GeneralException;
+import Gift4U.Backend.external.FastApiClient;
+import Gift4U.Backend.external.dto.FastApiResponse;
 import Gift4U.Backend.security.auth.manager.LogoutAccessTokenManager;
 import Gift4U.Backend.security.auth.manager.RefreshTokenManager;
 import Gift4U.Backend.security.auth.provider.JwtTokenProvider;
@@ -38,6 +40,7 @@ public class UserServiceImpl implements UserService {
 	private final UserDetailsService userDetailsService;
 	private final RefreshTokenManager refreshTokenManager;
 	private final LogoutAccessTokenManager logoutAccessTokenManager;
+	private final FastApiClient fastApiClient;
 
 	// 사용자 회원가입
 	@Override
@@ -113,5 +116,48 @@ public class UserServiceImpl implements UserService {
 			.orElseThrow(() -> new GeneralException(ErrorStatus.EMAIL_USER_NOT_MATCH));
 
 		return UserConverter.toMyPageProfileResponse(user);
+	}
+
+	// 홈 선물 조회 API
+	@Override
+	public UserResponseDTO.HomePresentList homePresent() {
+
+		FastApiResponse.HomePresentList fastApiResult = fastApiClient.getHomePresent();
+
+		return UserResponseDTO.HomePresentList.builder()
+			.randomGifts(
+				fastApiResult.getRandomGifts().stream()
+					.map(g -> UserResponseDTO.GiftItem.builder()
+						.title(g.getTitle())
+						.lprice(g.getLprice())
+						.link(g.getLink())
+						.image(g.getImage())
+						.mallName(g.getMallName())
+						.build()
+					).toList()
+			)
+			.luxuryGifts(
+				fastApiResult.getLuxuryGifts().stream()
+					.map(g -> UserResponseDTO.GiftItem.builder()
+						.title(g.getTitle())
+						.lprice(g.getLprice())
+						.link(g.getLink())
+						.image(g.getImage())
+						.mallName(g.getMallName())
+						.build()
+					).toList()
+			)
+			.budgetGifts(
+				fastApiResult.getBudgetGifts().stream()
+					.map(g -> UserResponseDTO.GiftItem.builder()
+						.title(g.getTitle())
+						.lprice(g.getLprice())
+						.link(g.getLink())
+						.image(g.getImage())
+						.mallName(g.getMallName())
+						.build()
+					).toList()
+			)
+			.build();
 	}
 }
