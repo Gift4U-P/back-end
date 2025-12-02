@@ -42,7 +42,7 @@ public class AskRecommendation extends BaseEntity {
 	@Column(nullable = false, length = 250)
 	private String characterText;
 
-	@Column(columnDefinition = "json", nullable = false)
+	@Column(nullable = false, length = 250)
 	private String characterType;
 
 	@Column(columnDefinition = "TEXT", nullable = false)

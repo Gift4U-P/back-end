@@ -7,3 +7,4 @@ spring:
 external:
   fastapi:
     home-present-url: http://localhost:8000/homePresent
+    survey-recommend-url: http://localhost:8000/survey/result

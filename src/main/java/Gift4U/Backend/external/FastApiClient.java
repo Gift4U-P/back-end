@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import Gift4U.Backend.apiPayload.code.status.ErrorStatus;
 
 import Gift4U.Backend.apiPayload.exception.GeneralException;
+import Gift4U.Backend.external.dto.FastApiRequest;
 import Gift4U.Backend.external.dto.FastApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +25,10 @@ public class FastApiClient {
 	@Value("${external.fastapi.home-present-url}")
 	private String fastApiHomePresentUrl;
 
+	@Value("${external.fastapi.survey-recommend-url}")
+	private String fastApiSurveyRecommendUrl;
+
+	// 홈 선물 조회 API
 	public FastApiResponse.HomePresentList getHomePresent() {
 		try {
 			HttpHeaders headers = new HttpHeaders();
@@ -39,6 +44,24 @@ public class FastApiClient {
 					entity,
 					FastApiResponse.HomePresentList.class
 				);
+
+			return response.getBody();
+
+		} catch (Exception e) {
+			throw new GeneralException(ErrorStatus.FASTAPI_COMMUNICATION_ERROR);
+		}
+	}
+
+	// 설문 추천 결과 조회 API
+	public FastApiResponse.SearchSurveyList getSurveyRecommend(FastApiRequest.SurveyRequest request) {
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+
+			HttpEntity<FastApiRequest.SurveyRequest> entity = new HttpEntity<>(request, headers);
+
+			ResponseEntity<FastApiResponse.SearchSurveyList> response =
+				restTemplate.exchange(fastApiSurveyRecommendUrl, HttpMethod.POST, entity, FastApiResponse.SearchSurveyList.class);
 
 			return response.getBody();
 
