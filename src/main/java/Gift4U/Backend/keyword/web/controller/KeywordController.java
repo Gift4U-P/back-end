@@ -16,6 +16,8 @@ import Gift4U.Backend.keyword.web.docs.KeywordControllerDocs;
 import Gift4U.Backend.keyword.web.dto.KeywordRequestDTO;
 import Gift4U.Backend.keyword.web.dto.KeywordResponseDTO;
 import Gift4U.Backend.security.auth.userDetails.CustomUserDetails;
+import Gift4U.Backend.survey.web.dto.SurveyRequestDTO;
+import Gift4U.Backend.survey.web.dto.SurveyResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,6 +46,26 @@ public class KeywordController implements KeywordControllerDocs {
 		Long userId = userDetails.getUserId();
 		Long keywordId = request.getKeywordId();
 		KeywordResponseDTO.KeywordDetailResult result = keywordService.searchKeywordDetail(userId, keywordId);
+		return new ResponseEntity<>(ApiResponse.of(SuccessStatus._OK, result), HttpStatus.CREATED);
+	}
+
+	// 키워드 추천 결과 조회 API
+	@PostMapping("/result")
+	public ResponseEntity<ApiResponse<KeywordResponseDTO.KeywordQuestionResponse>> keyword(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@RequestBody KeywordRequestDTO.KeywordResultRequest request) {
+
+		KeywordResponseDTO.KeywordQuestionResponse result = keywordService.searchKeyword(userDetails.getUserId(), request);
+		return new ResponseEntity<>(ApiResponse.of(SuccessStatus._OK, result), HttpStatus.CREATED);
+	}
+
+	// 키워드 추천 결과 저장 API
+	@PostMapping("/save")
+	public ResponseEntity<ApiResponse<KeywordResponseDTO.KeywordSaveResponse>> saveKeyword(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@RequestBody KeywordRequestDTO.KeywordSaveRequest request) {
+
+		KeywordResponseDTO.KeywordSaveResponse result = keywordService.saveKeyword(userDetails.getUserId(), request);
 		return new ResponseEntity<>(ApiResponse.of(SuccessStatus._OK, result), HttpStatus.CREATED);
 	}
 }
