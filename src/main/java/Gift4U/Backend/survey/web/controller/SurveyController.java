@@ -46,4 +46,24 @@ public class SurveyController implements SurveyControllerDocs {
 		SurveyResponseDTO.SurveyDetailResult result = surveyService.searchSurveyDetail(userId, surveyId);
 		return new ResponseEntity<>(ApiResponse.of(SuccessStatus._OK, result), HttpStatus.CREATED);
 	}
+
+	// 설문 추천 결과 조회 API
+	@PostMapping("/result")
+	public ResponseEntity<ApiResponse<SurveyResponseDTO.SurveyQuestionResponse>> survey(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@RequestBody SurveyRequestDTO.SurveyResultRequest request) {
+
+		SurveyResponseDTO.SurveyQuestionResponse result = surveyService.searchSurvey(userDetails.getUserId(), request);
+		return new ResponseEntity<>(ApiResponse.of(SuccessStatus._OK, result), HttpStatus.CREATED);
+	}
+
+	// 설문 추천 결과 저장 API
+	@PostMapping("/save")
+	public ResponseEntity<ApiResponse<SurveyResponseDTO.SurveySaveResponse>> saveSurvey(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@RequestBody SurveyRequestDTO.SurveySaveRequest request) {
+
+		SurveyResponseDTO.SurveySaveResponse result = surveyService.saveSurvey(userDetails.getUserId(), request);
+		return new ResponseEntity<>(ApiResponse.of(SuccessStatus._OK, result), HttpStatus.CREATED);
+	}
 }

@@ -2,7 +2,6 @@ package Gift4U.Backend.external.dto;
 
 import java.util.List;
 
-import Gift4U.Backend.user.web.dto.UserResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +28,30 @@ public class FastApiResponse {
 	@AllArgsConstructor
 	@NoArgsConstructor
 	public static class GiftItem {
+		private String title;
+		private String lprice;
+		private String link;
+		private String image;
+		private String mallName;
+	}
+
+	// 설문 추천 결과 조회 API
+	@Builder
+	@Getter
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class SearchSurveyList {
+		private String analysis;
+		private String reasoning;
+		private String card_message;
+		private List<GiftList> giftList;
+	}
+
+	@Builder
+	@Getter
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class GiftList {
 		private String title;
 		private String lprice;
 		private String link;

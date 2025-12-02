@@ -37,4 +37,26 @@ public interface SurveyControllerDocs {
 	ResponseEntity<ApiResponse<SurveyResponseDTO.SurveyDetailResult>> surveyDetail(
 		@AuthenticationPrincipal CustomUserDetails userDetails,
 		@RequestBody SurveyRequestDTO.SurveyRequest request);
+
+	@Operation(
+		summary = "설문 추천 결과 조회",
+		description = "설문 결과를 분석하여 선물을 추천합니다.",
+		responses = {
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "성공입니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SurveyResponseDTO.SurveyQuestionResponse.class)))
+		}
+	)
+	ResponseEntity<ApiResponse<SurveyResponseDTO.SurveyQuestionResponse>> survey(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@RequestBody SurveyRequestDTO.SurveyResultRequest request);
+
+	@Operation(
+		summary = "설문 추천 결과 저장",
+		description = "설문 추천 결과를 저장합니다.",
+		responses = {
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "성공입니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SurveyResponseDTO.SurveySaveResponse.class)))
+		}
+	)
+	ResponseEntity<ApiResponse<SurveyResponseDTO.SurveySaveResponse>> saveSurvey(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@RequestBody SurveyRequestDTO.SurveySaveRequest request);
 }

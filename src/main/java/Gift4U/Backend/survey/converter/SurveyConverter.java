@@ -1,5 +1,6 @@
 package Gift4U.Backend.survey.converter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -44,5 +45,14 @@ public class SurveyConverter {
 		} catch (JsonProcessingException e) {
 			throw new GeneralException(ErrorStatus.JSON_PARSE_ERROR);
 		}
+	}
+
+	// 설문 추천 결과 저장 API
+	public static SurveyResponseDTO.SurveySaveResponse toSurveySaveResponse(AskRecommendation survey) {
+		return SurveyResponseDTO.SurveySaveResponse.builder()
+			.id(survey.getId())
+			.savedName(survey.getSavedName())
+			.createdAt(LocalDateTime.from(survey.getCreatedAt()))
+			.build();
 	}
 }
