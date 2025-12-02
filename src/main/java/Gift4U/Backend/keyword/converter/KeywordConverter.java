@@ -1,5 +1,6 @@
 package Gift4U.Backend.keyword.converter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -10,7 +11,6 @@ import Gift4U.Backend.apiPayload.code.status.ErrorStatus;
 import Gift4U.Backend.apiPayload.exception.GeneralException;
 import Gift4U.Backend.keyword.domain.KeywordRecommendation;
 import Gift4U.Backend.keyword.web.dto.KeywordResponseDTO;
-import Gift4U.Backend.survey.domain.AskRecommendation;
 
 public class KeywordConverter {
 
@@ -48,5 +48,14 @@ public class KeywordConverter {
 		} catch (JsonProcessingException e) {
 			throw new GeneralException(ErrorStatus.JSON_PARSE_ERROR);
 		}
+	}
+
+	// 키워드 추천 결과 저장 API
+	public static KeywordResponseDTO.KeywordSaveResponse toKeywordSaveResponse(KeywordRecommendation keyword) {
+		return KeywordResponseDTO.KeywordSaveResponse.builder()
+			.id(keyword.getId())
+			.savedName(keyword.getSavedName())
+			.createdAt(LocalDateTime.from(keyword.getCreatedAt()))
+			.build();
 	}
 }

@@ -36,4 +36,16 @@ public class FastApiRequest {
 		@JsonProperty("q10")
 		private String qTen;
 	}
+
+	// 키워드 조회용 요청 DTO
+	@Getter
+	@Setter
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class KeywordRequest {
+		private String age;
+		private String gender;
+		private String relationship;
+		private String situation;
+	}
 }

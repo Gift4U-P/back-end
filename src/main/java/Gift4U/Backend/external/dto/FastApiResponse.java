@@ -2,6 +2,7 @@ package Gift4U.Backend.external.dto;
 
 import java.util.List;
 
+import Gift4U.Backend.keyword.web.dto.KeywordResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,6 +44,21 @@ public class FastApiResponse {
 	public static class SearchSurveyList {
 		private String analysis;
 		private String reasoning;
+		private String card_message;
+		private List<GiftList> giftList;
+	}
+
+	// 키워드 추천 결과 조회 API
+	@Builder
+	@Getter
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class SearchKeywordList {
+		private String age;
+		private String gender;
+		private String relationship;
+		private String situation;
+		private String keywordText;
 		private String card_message;
 		private List<GiftList> giftList;
 	}

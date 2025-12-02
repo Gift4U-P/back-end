@@ -28,6 +28,9 @@ public class FastApiClient {
 	@Value("${external.fastapi.survey-recommend-url}")
 	private String fastApiSurveyRecommendUrl;
 
+	@Value("${external.fastapi.keyword-recommend-url}")
+	private String fastApiKeywordRecommendUrl;
+
 	// 홈 선물 조회 API
 	public FastApiResponse.HomePresentList getHomePresent() {
 		try {
@@ -62,6 +65,24 @@ public class FastApiClient {
 
 			ResponseEntity<FastApiResponse.SearchSurveyList> response =
 				restTemplate.exchange(fastApiSurveyRecommendUrl, HttpMethod.POST, entity, FastApiResponse.SearchSurveyList.class);
+
+			return response.getBody();
+
+		} catch (Exception e) {
+			throw new GeneralException(ErrorStatus.FASTAPI_COMMUNICATION_ERROR);
+		}
+	}
+
+	// 키워드 추천 결과 조회 API
+	public FastApiResponse.SearchKeywordList getKeywordRecommend(FastApiRequest.KeywordRequest request) {
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+
+			HttpEntity<FastApiRequest.KeywordRequest> entity = new HttpEntity<>(request, headers);
+
+			ResponseEntity<FastApiResponse.SearchKeywordList> response =
+				restTemplate.exchange(fastApiKeywordRecommendUrl, HttpMethod.POST, entity, FastApiResponse.SearchKeywordList.class);
 
 			return response.getBody();
 
