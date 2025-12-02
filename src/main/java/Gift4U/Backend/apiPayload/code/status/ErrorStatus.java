@@ -50,6 +50,7 @@ public enum ErrorStatus implements BaseErrorCode {
 
 	// 키워드 추천 에러
 	KEYWORD_NOT_EXIST_ERROR(HttpStatus.BAD_REQUEST, "KEYWORD4001", "존재하지 않는 keywordId 이거나 본인의 keyword가 아닙니다."),
+	KEYWORD_REDIS_KEY_EXPIRED(HttpStatus.BAD_REQUEST, "KEYWORD4002", "사용자의 키워드 추천 결과가 Redis에서 만료되었거나 저장되어 있지 않습니다."),
 
 	// 예시,,,
 	ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다.");

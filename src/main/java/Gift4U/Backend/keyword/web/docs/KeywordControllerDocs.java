@@ -8,6 +8,7 @@ import Gift4U.Backend.apiPayload.ApiResponse;
 import Gift4U.Backend.keyword.web.dto.KeywordRequestDTO;
 import Gift4U.Backend.keyword.web.dto.KeywordResponseDTO;
 import Gift4U.Backend.security.auth.userDetails.CustomUserDetails;
+import Gift4U.Backend.survey.web.dto.SurveyRequestDTO;
 import Gift4U.Backend.survey.web.dto.SurveyResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -38,4 +39,26 @@ public interface KeywordControllerDocs {
 	ResponseEntity<ApiResponse<KeywordResponseDTO.KeywordDetailResult>> keywordDetail(
 		@AuthenticationPrincipal CustomUserDetails userDetails,
 		@RequestBody KeywordRequestDTO.KeywordRequest request);
+
+	@Operation(
+		summary = "키워드 추천 결과 조회",
+		description = "키워드 선택 결과를 분석하여 선물을 추천합니다.",
+		responses = {
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "성공입니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = KeywordResponseDTO.KeywordQuestionResponse.class)))
+		}
+	)
+	ResponseEntity<ApiResponse<KeywordResponseDTO.KeywordQuestionResponse>> keyword(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@RequestBody KeywordRequestDTO.KeywordResultRequest request);
+
+	@Operation(
+		summary = "키워드 추천 결과 저장",
+		description = "키워드 추천 결과를 저장합니다.",
+		responses = {
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "성공입니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = KeywordResponseDTO.KeywordSaveResponse.class)))
+		}
+	)
+	ResponseEntity<ApiResponse<KeywordResponseDTO.KeywordSaveResponse>> saveKeyword(
+		@AuthenticationPrincipal CustomUserDetails userDetails,
+		@RequestBody KeywordRequestDTO.KeywordSaveRequest request);
 }

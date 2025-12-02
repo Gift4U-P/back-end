@@ -3,11 +3,11 @@ package Gift4U.Backend.keyword.web.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import Gift4U.Backend.survey.web.dto.SurveyResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 public class KeywordResponseDTO {
 
@@ -56,5 +56,59 @@ public class KeywordResponseDTO {
 			private String image;
 			private String mallName;
 		}
+	}
+
+	// 키워드 추천 결과 조회 응답 DTO
+	@Getter
+	@Setter
+	@Builder
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class KeywordQuestionResponse {
+		private String age;
+		private String gender;
+		private String relationship;
+		private String situation;
+		private String keywordText;
+		private String card_message;
+		private List<GiftList> giftList;
+
+		@Getter
+		@Builder
+		@AllArgsConstructor
+		@NoArgsConstructor
+		public static class GiftList {
+			private String title;
+			private String lprice;
+			private String link;
+			private String image;
+			private String mallName;
+		}
+	}
+
+	// 키워드 추천 결과 저장 응답 DTO
+	@Getter
+	@Builder
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class KeywordSaveResponse {
+		private Long id;
+		private String savedName;
+		private LocalDateTime createdAt;
+	}
+
+	// Redis 저장용 DTO
+	@Getter
+	@Builder
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class KeywordRedisDTO {
+		private String age;
+		private String gender;
+		private String relationship;
+		private String situation;
+		private String keywordText;
+		private String card_message;
+		private List<KeywordQuestionResponse.GiftList> giftList;
 	}
 }
