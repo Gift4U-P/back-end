@@ -6,7 +6,7 @@ spring:
 
 external:
   fastapi:
-    home-present-url: http://fastapi-app:8000/homePresent
+    home-present-url: http://fastapi-app:8000/users/homePresent
     survey-recommend-url: http://fastapi-app:8000/survey/result
     keyword-recommend-url: http://fastapi-app:8000/keywords/result
 
