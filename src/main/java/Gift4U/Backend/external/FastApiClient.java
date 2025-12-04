@@ -43,8 +43,8 @@ public class FastApiClient {
 			ResponseEntity<FastApiResponse.HomePresentList> response =
 				restTemplate.exchange(
 					fastApiHomePresentUrl,
-					HttpMethod.POST,
-					entity,
+					HttpMethod.GET,
+					null,
 					FastApiResponse.HomePresentList.class
 				);
 
