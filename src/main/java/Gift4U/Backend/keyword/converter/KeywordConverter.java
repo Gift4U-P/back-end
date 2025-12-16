@@ -30,7 +30,7 @@ public class KeywordConverter {
 		try {
 			// JSON 파싱
 			List<KeywordResponseDTO.KeywordDetailResult.GiftList> giftLists =
-				objectMapper.readValue(keyword.getPresentRecommend(), new TypeReference<>() {
+				objectMapper.readValue(keyword.getGiftList(), new TypeReference<>() {
 				});
 
 			// DTO 반환
@@ -41,7 +41,7 @@ public class KeywordConverter {
 				.relationship(keyword.getRelationship())
 				.situation(keyword.getSituation())
 				.keywordText(keyword.getKeywordText())
-				.card_message(keyword.getRecommendText())
+				.card_message(keyword.getCard_message())
 				.giftList(giftLists)
 				.build();
 

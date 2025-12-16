@@ -84,6 +84,14 @@ public class SurveyServiceImpl implements SurveyService{
 		// 결과 매핑
 		SurveyResponseDTO.SurveyQuestionResponse response = SurveyResponseDTO.SurveyQuestionResponse.builder()
 			.analysis(fastApiResponse.getAnalysis())
+			.evidence(
+				fastApiResponse.getEvidence().stream()
+					.map(r -> SurveyResponseDTO.SurveyQuestionResponse.Evidence.builder()
+						.category(r.getCategory())
+						.description(r.getDescription())
+						.build())
+					.collect(Collectors.toList())
+			)
 			.reasoning(fastApiResponse.getReasoning())
 			.card_message(fastApiResponse.getCard_message())
 			.giftList(
@@ -94,6 +102,7 @@ public class SurveyServiceImpl implements SurveyService{
 						.link(r.getLink())
 						.image(r.getImage())
 						.mallName(r.getMallName())
+						.accuracy(r.getAccuracy())
 						.build())
 					.collect(Collectors.toList())
 			)
@@ -112,6 +121,7 @@ public class SurveyServiceImpl implements SurveyService{
 			.qNine(request.getQNine())
 			.qTen(request.getQTen())
 			.analysis(response.getAnalysis())
+			.evidence(response.getEvidence())
 			.reasoning(response.getReasoning())
 			.card_message(response.getCard_message())
 			.giftList(response.getGiftList())
@@ -153,10 +163,11 @@ public class SurveyServiceImpl implements SurveyService{
 		AskRecommendation survey = AskRecommendation.builder()
 			.user(user)
 			.savedName(request.getSavedName())
-			.characterText(redisResult.getAnalysis())
-			.characterType(redisResult.getReasoning())
-			.recommendText(redisResult.getCard_message())
-			.presentRecommend(JsonUtils.toJson(redisResult.getGiftList()))
+			.analysis(redisResult.getAnalysis())
+			.evidence(JsonUtils.toJson(redisResult.getEvidence()))
+			.reasoning(redisResult.getReasoning())
+			.card_message(redisResult.getCard_message())
+			.giftList(JsonUtils.toJson(redisResult.getGiftList()))
 			.build();
 
 		AskRecommendation saved = surveyRepository.save(survey);

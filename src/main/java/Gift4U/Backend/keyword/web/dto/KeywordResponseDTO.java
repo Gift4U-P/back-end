@@ -55,6 +55,7 @@ public class KeywordResponseDTO {
 			private String link;
 			private String image;
 			private String mallName;
+			private Double accuracy;
 		}
 	}
 
@@ -83,6 +84,7 @@ public class KeywordResponseDTO {
 			private String link;
 			private String image;
 			private String mallName;
+			private Double accuracy;
 		}
 	}
 

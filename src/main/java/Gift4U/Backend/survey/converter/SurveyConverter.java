@@ -30,15 +30,20 @@ public class SurveyConverter {
 		try {
 			// JSON 파싱
 			List<SurveyResponseDTO.SurveyDetailResult.GiftList> giftLists =
-				objectMapper.readValue(survey.getPresentRecommend(), new TypeReference<>() {
+				objectMapper.readValue(survey.getGiftList(), new TypeReference<>() {
+				});
+
+			List<SurveyResponseDTO.SurveyDetailResult.Evidence> evidence =
+				objectMapper.readValue(survey.getEvidence(), new TypeReference<>() {
 				});
 
 			// DTO 반환
 			return SurveyResponseDTO.SurveyDetailResult.builder()
 				.savedName(survey.getSavedName())
-				.analysis(survey.getCharacterText())
-				.reasoning(survey.getCharacterType())
-				.card_message(survey.getRecommendText())
+				.analysis(survey.getAnalysis())
+				.evidence(evidence)
+				.reasoning(survey.getReasoning())
+				.card_message(survey.getCard_message())
 				.giftList(giftLists)
 				.build();
 

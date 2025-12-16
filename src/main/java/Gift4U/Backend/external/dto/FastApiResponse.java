@@ -2,7 +2,6 @@ package Gift4U.Backend.external.dto;
 
 import java.util.List;
 
-import Gift4U.Backend.keyword.web.dto.KeywordResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,6 +42,7 @@ public class FastApiResponse {
 	@NoArgsConstructor
 	public static class SearchSurveyList {
 		private String analysis;
+		private List<Evidence> evidence;
 		private String reasoning;
 		private String card_message;
 		private List<GiftList> giftList;
@@ -73,5 +73,15 @@ public class FastApiResponse {
 		private String link;
 		private String image;
 		private String mallName;
+		private Double accuracy;
+	}
+
+	@Getter
+	@Builder
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class Evidence {
+		private String category;
+		private String description;
 	}
 }
