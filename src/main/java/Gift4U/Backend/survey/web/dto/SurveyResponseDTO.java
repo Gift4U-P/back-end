@@ -40,9 +40,19 @@ public class SurveyResponseDTO {
 	public static class SurveyDetailResult {
 		private String savedName;
 		private String analysis;
+		private List<Evidence> evidence;
 		private String reasoning;
 		private String card_message;
 		private List<GiftList> giftList;
+
+		@Getter
+		@Builder
+		@AllArgsConstructor
+		@NoArgsConstructor
+		public static class Evidence {
+			private String category;
+			private String description;
+		}
 
 		@Getter
 		@Builder
@@ -54,6 +64,7 @@ public class SurveyResponseDTO {
 			private String link;
 			private String image;
 			private String mallName;
+			private Double accuracy;
 		}
 	}
 
@@ -65,9 +76,19 @@ public class SurveyResponseDTO {
 	@NoArgsConstructor
 	public static class SurveyQuestionResponse {
 		private String analysis;
+		private List<Evidence> evidence;
 		private String reasoning;
 		private String card_message;
 		private List<GiftList> giftList;
+
+		@Getter
+		@Builder
+		@AllArgsConstructor
+		@NoArgsConstructor
+		public static class Evidence {
+			private String category;
+			private String description;
+		}
 
 		@Getter
 		@Builder
@@ -79,6 +100,7 @@ public class SurveyResponseDTO {
 			private String link;
 			private String image;
 			private String mallName;
+			private Double accuracy;
 		}
 	}
 
@@ -121,6 +143,7 @@ public class SurveyResponseDTO {
 		private String qTen;
 
 		private String analysis;
+		private List<SurveyQuestionResponse.Evidence> evidence;
 		private String reasoning;
 		private String card_message;
 		private List<SurveyQuestionResponse.GiftList> giftList;
