@@ -40,14 +40,17 @@ public class AskRecommendation extends BaseEntity {
 	private String savedName;
 
 	@Column(nullable = false, length = 250)
-	private String characterText;
-
-	@Column(nullable = false, length = 250)
-	private String characterType;
-
-	@Column(columnDefinition = "TEXT", nullable = false)
-	private String recommendText;
+	private String analysis;
 
 	@Column(columnDefinition = "json", nullable = false)
-	private String presentRecommend;
+	private String evidence;
+
+	@Column(columnDefinition = "TEXT", nullable = false)
+	private String reasoning;
+
+	@Column(columnDefinition = "TEXT", nullable = false)
+	private String card_message;
+
+	@Column(columnDefinition = "json", nullable = false)
+	private String giftList;
 }

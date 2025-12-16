@@ -91,6 +91,7 @@ public class KeywordServiceImpl implements KeywordService {
 						.link(r.getLink())
 						.image(r.getImage())
 						.mallName(r.getMallName())
+						.accuracy(r.getAccuracy())
 						.build())
 					.collect(Collectors.toList())
 			)
@@ -148,8 +149,8 @@ public class KeywordServiceImpl implements KeywordService {
 			.relationship(redisResult.getRelationship())
 			.situation(redisResult.getSituation())
 			.keywordText(redisResult.getKeywordText())
-			.recommendText(redisResult.getCard_message())
-			.presentRecommend(JsonUtils.toJson(redisResult.getGiftList()))
+			.card_message(redisResult.getCard_message())
+			.giftList(JsonUtils.toJson(redisResult.getGiftList()))
 			.build();
 
 		KeywordRecommendation saved = keywordRepository.save(keyword);

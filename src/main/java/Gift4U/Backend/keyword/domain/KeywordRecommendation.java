@@ -55,8 +55,8 @@ public class KeywordRecommendation extends BaseEntity {
 	private String keywordText;
 
 	@Column(columnDefinition = "TEXT", nullable = false)
-	private String recommendText;
+	private String card_message;
 
 	@Column(columnDefinition = "json", nullable = false)
-	private String presentRecommend;
+	private String giftList;
 }
